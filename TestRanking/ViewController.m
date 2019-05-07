@@ -34,6 +34,10 @@
                 [[MachineResult alloc] initWithMachineId:10 startBalance:1 endBalance:3]
                 ];
     NSArray<MachineResult*>* rankedResults = [self rankMachineResultWithRank:_results];
+    //print out
+    for (MachineResult * r in rankedResults) {
+        NSLog(@"Machine(%li,%.0f. %.0f) has ranked %li", r.machineId, r.startBalance, r.endBalance, r.ranking);
+    }
 }
 
 - (NSArray<MachineResult*>*) rankMachineResultWithRank:
