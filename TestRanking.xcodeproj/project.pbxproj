@@ -15,7 +15,6 @@
 		A3763A6A22818ADC00EABEDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3763A6922818ADC00EABEDD /* main.m */; };
 		A3763A7422818ADC00EABEDD /* TestRankingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3763A7322818ADC00EABEDD /* TestRankingTests.m */; };
 		A3763A8022818AF500EABEDD /* MachineResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A3763A7F22818AF500EABEDD /* MachineResult.m */; };
-		A3763A8322818C7C00EABEDD /* MachineResultWithRank.m in Sources */ = {isa = PBXBuildFile; fileRef = A3763A8222818C7C00EABEDD /* MachineResultWithRank.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +43,6 @@
 		A3763A7522818ADC00EABEDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3763A7E22818AF500EABEDD /* MachineResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineResult.h; sourceTree = "<group>"; };
 		A3763A7F22818AF500EABEDD /* MachineResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MachineResult.m; sourceTree = "<group>"; };
-		A3763A8122818C7C00EABEDD /* MachineResultWithRank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachineResultWithRank.h; sourceTree = "<group>"; };
-		A3763A8222818C7C00EABEDD /* MachineResultWithRank.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MachineResultWithRank.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +95,6 @@
 				A3763A6922818ADC00EABEDD /* main.m */,
 				A3763A7E22818AF500EABEDD /* MachineResult.h */,
 				A3763A7F22818AF500EABEDD /* MachineResult.m */,
-				A3763A8122818C7C00EABEDD /* MachineResultWithRank.h */,
-				A3763A8222818C7C00EABEDD /* MachineResultWithRank.m */,
 			);
 			path = TestRanking;
 			sourceTree = "<group>";
@@ -214,7 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3763A5F22818ADA00EABEDD /* ViewController.m in Sources */,
-				A3763A8322818C7C00EABEDD /* MachineResultWithRank.m in Sources */,
 				A3763A6A22818ADC00EABEDD /* main.m in Sources */,
 				A3763A8022818AF500EABEDD /* MachineResult.m in Sources */,
 				A3763A5C22818ADA00EABEDD /* AppDelegate.m in Sources */,

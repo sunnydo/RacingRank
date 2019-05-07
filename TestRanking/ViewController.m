@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "MachineResult.h"
-#import "MachineResultWithRank.h"
 
 @interface ViewController ()
 
