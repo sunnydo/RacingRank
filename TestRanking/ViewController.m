@@ -22,16 +22,16 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     _results = @[
-                [[MachineResult alloc] initWithMachineId:1 startBalance:1 endBalance:30],
-                [[MachineResult alloc] initWithMachineId:2 startBalance:1 endBalance:30],
-                [[MachineResult alloc] initWithMachineId:3 startBalance:1 endBalance:30],
-                [[MachineResult alloc] initWithMachineId:4 startBalance:1 endBalance:13],
-                [[MachineResult alloc] initWithMachineId:5 startBalance:1 endBalance:3],
-                [[MachineResult alloc] initWithMachineId:6 startBalance:1 endBalance:13],
-                [[MachineResult alloc] initWithMachineId:7 startBalance:1 endBalance:13],
-                [[MachineResult alloc] initWithMachineId:8 startBalance:1 endBalance:13],
-                [[MachineResult alloc] initWithMachineId:9 startBalance:1 endBalance:13],
-                [[MachineResult alloc] initWithMachineId:10 startBalance:1 endBalance:3]
+                [[MachineResult alloc] initWithMachineId:1 startBalance:1 endBalance:10],
+                [[MachineResult alloc] initWithMachineId:2 startBalance:1 endBalance:2],
+                [[MachineResult alloc] initWithMachineId:3 startBalance:1 endBalance:2],
+                [[MachineResult alloc] initWithMachineId:4 startBalance:1 endBalance:2],
+                [[MachineResult alloc] initWithMachineId:5 startBalance:1 endBalance:2],
+                [[MachineResult alloc] initWithMachineId:6 startBalance:1 endBalance:1],
+                [[MachineResult alloc] initWithMachineId:7 startBalance:1 endBalance:7],
+                [[MachineResult alloc] initWithMachineId:8 startBalance:1 endBalance:8],
+                [[MachineResult alloc] initWithMachineId:9 startBalance:1 endBalance:9],
+                [[MachineResult alloc] initWithMachineId:10 startBalance:1 endBalance:10]
                 ];
     NSArray<MachineResult*>* rankedResults = [self rankMachineResultWithRank:_results];
     //print out
@@ -40,12 +40,9 @@
     }
 }
 
-- (NSArray<MachineResult*>*) rankMachineResultWithRank:
-(NSArray<MachineResult*>*) results {
-    
+- (NSArray<MachineResult*>*) rankMachineResultWithRank: (NSArray<MachineResult*>*) results {
     NSMutableArray<MachineResult*> *copyResults = [results mutableCopy];
-    
-    //sort
+
     for( int i = 0; i < copyResults.count; i++) {
         double gap = copyResults[i].gapStartEnd;
         MachineResult *temp = copyResults[i];
@@ -57,15 +54,12 @@
                 copyResults[j + 1].ranking++;
             }
         }
-        if((i > 1) && (temp.gapStartEnd > copyResults[i-1].gapStartEnd)) {
-            temp.ranking = copyResults[i-1].ranking +1;
-        } else if((i > 0) && (temp.gapStartEnd == copyResults[i-1].gapStartEnd)) {
-            temp.ranking  = copyResults[i-1].ranking;
+        copyResults[j + 1] = temp;
+        if(j < 0) {//first item
+            temp.ranking = 1;
         } else {
-            temp.ranking = i+1;
+            temp.ranking = (j + 1) + 1;
         }
-        
-        copyResults[j + 1] = temp;//i
     }
     return copyResults;
 }
