@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MachineResult.h"
+#import "MachineResultWithRank.h"
 
 @interface ViewController ()
 
@@ -21,47 +22,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    _results = @[
-                [[MachineResult alloc] initWithMachineId:1 startBalance:1 endBalance:10],
-                [[MachineResult alloc] initWithMachineId:2 startBalance:1 endBalance:2],
-                [[MachineResult alloc] initWithMachineId:3 startBalance:1 endBalance:2],
-                [[MachineResult alloc] initWithMachineId:4 startBalance:1 endBalance:2],
-                [[MachineResult alloc] initWithMachineId:5 startBalance:1 endBalance:2],
-                [[MachineResult alloc] initWithMachineId:6 startBalance:1 endBalance:1],
-                [[MachineResult alloc] initWithMachineId:7 startBalance:1 endBalance:7],
-                [[MachineResult alloc] initWithMachineId:8 startBalance:1 endBalance:8],
-                [[MachineResult alloc] initWithMachineId:9 startBalance:1 endBalance:9],
-                [[MachineResult alloc] initWithMachineId:10 startBalance:1 endBalance:10]
-                ];
-    NSArray<MachineResult*>* rankedResults = [self rankMachineResultWithRank:_results];
-    //print out
-    for (MachineResult * r in rankedResults) {
-        NSLog(@"Machine(%li,%.0f,%.0f) has ranked %li", r.machineId, r.startBalance, r.endBalance, r.ranking);
-    }
+    [self rankMachineResultWithRank:@[
+                                      [[MachineResult alloc] initWithMachineId:1 startBalance:1 endBalance:30],
+                                      [[MachineResult alloc] initWithMachineId:2 startBalance:1 endBalance:30],
+                                      [[MachineResult alloc] initWithMachineId:3 startBalance:1 endBalance:30],
+                                      [[MachineResult alloc] initWithMachineId:4 startBalance:1 endBalance:13],
+                                      [[MachineResult alloc] initWithMachineId:5 startBalance:1 endBalance:13],
+                                      [[MachineResult alloc] initWithMachineId:6 startBalance:1 endBalance:13],
+                                      [[MachineResult alloc] initWithMachineId:7 startBalance:1 endBalance:13],
+                                      [[MachineResult alloc] initWithMachineId:8 startBalance:1 endBalance:13],
+                                      [[MachineResult alloc] initWithMachineId:9 startBalance:1 endBalance:3],
+                                      [[MachineResult alloc] initWithMachineId:10 startBalance:1 endBalance:3]
+                                      ]];
 }
 
-- (NSArray<MachineResult*>*) rankMachineResultWithRank: (NSArray<MachineResult*>*) results {
-    NSMutableArray<MachineResult*> *copyResults = [results mutableCopy];
-
-    for( int i = 0; i < copyResults.count; i++) {
-        double gap = copyResults[i].gapStartEnd;
-        MachineResult *temp = copyResults[i];
-        int j = i -  1;
-        for(; (j >= 0 && copyResults[j].gapStartEnd <= gap); j--) {
-            copyResults[j + 1] = copyResults[j];
-            //ranking re-allocate
-            if (gap > copyResults[j + 1].gapStartEnd ) {//different rank
-                copyResults[j + 1].ranking++;
+- (void) rankMachineResultWithRank: (NSArray<MachineResult*>*) results {
+    //sort
+    results = [results sortedArrayUsingComparator:^NSComparisonResult(MachineResult* a, MachineResult* b) {
+        return a.endBalance < b.endBalance;
+    }];
+    //index
+    results[0].ranking = 1;
+    
+    [results enumerateObjectsUsingBlock:^(MachineResult* object, NSUInteger idx, BOOL *stop) {
+        // do something with object
+        if(idx > 0) {
+            if (results[idx].endBalance == results[idx-1].endBalance) {
+                results[idx].ranking = results[idx-1].ranking;
+            } else {
+                results[idx].ranking = idx + 1;
             }
         }
-        copyResults[j + 1] = temp;
-        if(j < 0) {//first item
-            temp.ranking = 1;
-        } else {
-            temp.ranking = (j + 1) + 1;
-        }
-    }
-    return copyResults;
+    }];
+    NSLog(@"RANKED MACHINES: %@", results);
 }
 
 @end
